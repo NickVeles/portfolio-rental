@@ -41,8 +41,8 @@ function Navbar() {
           </Button>
 
           <Button
-            variant="outline"
-            className="text-white bg-secondary-600 hover:bg-white rounded-lg"
+            variant="secondary"
+            className="text-white bg-secondary-600 hover:bg-white hover:text-primary-700 rounded-lg"
             asChild
           >
             <Link href="/sign-up">Sign Up</Link>

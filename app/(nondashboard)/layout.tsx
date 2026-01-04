@@ -4,9 +4,12 @@ import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="size-full">
       <Navbar />
-      <main className={`h-full flex w-full flex-col pt-[${NAVBAR_HEIGHT}px]`}>
+      <main
+        className={`size-full flex flex-col pt-[${NAVBAR_HEIGHT}px]`}
+        style={{ paddingTop: `${NAVBAR_HEIGHT}px` }}
+      >
         {children}
       </main>
     </div>
