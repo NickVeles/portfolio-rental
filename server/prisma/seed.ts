@@ -1,8 +1,24 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+import { PrismaPg } from "@prisma/adapter-pg";
+import dotenv from "dotenv";
+import pg from "pg";
 
-const prisma = new PrismaClient();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables
+dotenv.config({ path: path.join(__dirname, "..", ".env") });
+
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL!,
+});
+
+const adapter = new PrismaPg(pool);
+
+const prisma = new PrismaClient({ adapter });
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
