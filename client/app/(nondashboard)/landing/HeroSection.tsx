@@ -20,7 +20,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="absolute top-1/3 transform  -translate-y-1/2 w-full flex justify-center"
+        className="absolute top-5/12 transform -translate-y-1/2 w-full flex justify-center"
       >
         <div className="max-w-4xl max-auto px-16 sm:px-12 text-center">
           <h1 className="text-5xl font-bold text-white mb-4">
