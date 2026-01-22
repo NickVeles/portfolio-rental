@@ -1,24 +1,8 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
-import { PrismaPg } from "@prisma/adapter-pg";
-import dotenv from "dotenv";
-import pg from "pg";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load environment variables
-dotenv.config({ path: path.join(__dirname, "..", ".env") });
-
-const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL!,
-});
-
-const adapter = new PrismaPg(pool);
-
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient();
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -62,11 +46,9 @@ async function resetSequence(modelName: string) {
   if (maxIdResult.length === 0) return;
 
   const nextId = maxIdResult[0].id + 1;
-  await prisma.$executeRaw(
-    Prisma.raw(`
+  await prisma.$executeRawUnsafe(`
     SELECT setval(pg_get_serial_sequence('${quotedModelName}', 'id'), coalesce(max(id)+1, ${nextId}), false) FROM ${quotedModelName};
-  `)
-  );
+  `);
   console.log(`Reset sequence for ${modelName} to ${nextId}`);
 }
 
