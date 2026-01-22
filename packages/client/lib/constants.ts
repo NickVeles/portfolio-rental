@@ -23,22 +23,14 @@ import {
   Trees,
   LucideIcon,
 } from "lucide-react";
+import {
+  Amenity as AmenityEnum,
+  Highlight as HighlightEnum,
+  PropertyType as PropertyTypeEnum,
+} from "@portfolio-rental/shared";
 
-export enum AmenityEnum {
-  WasherDryer = "WasherDryer",
-  AirConditioning = "AirConditioning",
-  Dishwasher = "Dishwasher",
-  HighSpeedInternet = "HighSpeedInternet",
-  HardwoodFloors = "HardwoodFloors",
-  WalkInClosets = "WalkInClosets",
-  Microwave = "Microwave",
-  Refrigerator = "Refrigerator",
-  Pool = "Pool",
-  Gym = "Gym",
-  Parking = "Parking",
-  PetsAllowed = "PetsAllowed",
-  WiFi = "WiFi",
-}
+// Re-export enums for convenience
+export { AmenityEnum, HighlightEnum, PropertyTypeEnum };
 
 export const AmenityIcons: Record<AmenityEnum, LucideIcon> = {
   WasherDryer: Waves,
@@ -55,24 +47,6 @@ export const AmenityIcons: Record<AmenityEnum, LucideIcon> = {
   PetsAllowed: PawPrint,
   WiFi: Wifi,
 };
-
-export enum HighlightEnum {
-  HighSpeedInternetAccess = "HighSpeedInternetAccess",
-  WasherDryer = "WasherDryer",
-  AirConditioning = "AirConditioning",
-  Heating = "Heating",
-  SmokeFree = "SmokeFree",
-  CableReady = "CableReady",
-  SatelliteTV = "SatelliteTV",
-  DoubleVanities = "DoubleVanities",
-  TubShower = "TubShower",
-  Intercom = "Intercom",
-  SprinklerSystem = "SprinklerSystem",
-  RecentlyRenovated = "RecentlyRenovated",
-  CloseToTransit = "CloseToTransit",
-  GreatView = "GreatView",
-  QuietNeighborhood = "QuietNeighborhood",
-}
 
 export const HighlightIcons: Record<HighlightEnum, LucideIcon> = {
   HighSpeedInternetAccess: Wifi,
@@ -92,15 +66,6 @@ export const HighlightIcons: Record<HighlightEnum, LucideIcon> = {
   QuietNeighborhood: VolumeX,
 };
 
-export enum PropertyTypeEnum {
-  Rooms = "Rooms",
-  Tinyhouse = "Tinyhouse",
-  Apartment = "Apartment",
-  Villa = "Villa",
-  Townhouse = "Townhouse",
-  Cottage = "Cottage",
-}
-
 export const PropertyTypeIcons: Record<PropertyTypeEnum, LucideIcon> = {
   Rooms: Home,
   Tinyhouse: Warehouse,
@@ -110,7 +75,6 @@ export const PropertyTypeIcons: Record<PropertyTypeEnum, LucideIcon> = {
   Cottage: Trees,
 };
 
-// Add this constant at the end of the file
 export const NAVBAR_HEIGHT = 52; // in pixels
 
 // Test users for development

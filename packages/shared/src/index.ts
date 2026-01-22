@@ -1,2 +1,2 @@
-// Re-export all types
-export * from "./types";
+// Re-export Prisma generated types and enums
+export * from "./generated/prisma";

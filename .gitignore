@@ -45,5 +45,5 @@ next-env.d.ts
 # VS Code
 .vscode/
 
-# prisma
-/src/generated/prisma
+# prisma generated client
+*generated/

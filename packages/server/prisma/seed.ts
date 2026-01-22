@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@portfolio-rental/shared";
 import fs from "fs";
 import path from "path";
 
