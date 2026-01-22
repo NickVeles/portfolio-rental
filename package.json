@@ -9,6 +9,7 @@
     "dev:server": "npm run dev -w @portfolio-rental/server",
     "build": "npm run build --workspaces --if-present",
     "prisma:generate": "npm run prisma:generate -w @portfolio-rental/server",
+    "prisma:push": "npm run prisma:push -w @portfolio-rental/server",
     "seed": "npm run seed -w @portfolio-rental/server"
   }
 }
