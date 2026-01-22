@@ -98,3 +98,5 @@ export const testUsers = {
   },
   managerRole: "manager",
 };
+
+export const PHONE_NUMBER_LENGTH = 9;
