@@ -2,7 +2,7 @@
   "name": "portfolio-rental",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "packages/*"
   ],
   "scripts": {
     "dev:client": "npm run dev -w @portfolio-rental/client",
