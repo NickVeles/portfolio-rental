@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-rental",
+  "name": "@portfolio-rental/client",
   "version": "0.1.0",
   "private": true,
   "scripts": {

@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-rental",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:client": "npm run dev -w @portfolio-rental/client",
+    "dev:server": "npm run dev -w @portfolio-rental/server",
+    "build": "npm run build --workspaces"
+  }
+}
