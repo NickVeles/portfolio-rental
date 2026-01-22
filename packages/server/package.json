@@ -10,7 +10,7 @@
     "dev": "npm run build && concurrently \"npx tsc -w\" \"nodemon --exec tsx src/index.ts\"",
     "seed": "tsx prisma/seed.ts",
     "prisma:generate": "prisma generate",
-    "postprisma:generate": "shx cp -r node_modules/.prisma/client/index.d.ts ../client/types/prismaTypes.d.ts"
+    "postprisma:generate": "shx cp -r node_modules/.prisma/client/index.d.ts ../shared/src/types/prismaTypes.d.ts && shx cp -r node_modules/.prisma/client/index.d.ts ../client/types/prismaTypes.d.ts"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +31,8 @@
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "prisma": "^6.19.2",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "@portfolio-rental/shared": "*"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
