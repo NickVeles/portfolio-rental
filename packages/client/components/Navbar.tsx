@@ -1,7 +1,7 @@
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 import Link from "next/link";
-import { Logo } from "./Icons";
 import { Button } from "./ui/button";
+import LogoDiv from "./LogoDiv";
 
 function Navbar() {
   return (
@@ -11,22 +11,7 @@ function Navbar() {
     >
       <div className="flex justify-between items-center w-full py-3 px-8 bg-primary-700 text-white">
         <div className="flex items-center gap-4 md:gap-6">
-          <Link href="/" className="cursor-pointer" scroll={false}>
-            {/* logo div */}
-            <div className="group flex items-center gap-3 text-white">
-              <Logo
-                aria-label="VelRent Logo"
-                role="img"
-                className="size-6 group-hover:text-primary-300! "
-              />
-              <div className="text-xl font-bold group-hover:text-primary-300 ">
-                VEL
-                <span className="text-secondary-500 font-light group-hover:text-primary-300 ">
-                  RENT
-                </span>
-              </div>
-            </div>
-          </Link>
+          <LogoDiv />
         </div>
         <p className="text-primary-200 hidden md:block">
           Discover your perfect rental apartment with our advanced search
