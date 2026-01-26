@@ -26,24 +26,23 @@ Amplify.configure({
   },
 });
 
-const components = {
-  Header() {
-    const pathname = usePathname();
-    const isSignIn = pathname.match(/^\/sign-in$/);
+const HeaderComponent = ({ isSignIn = false }: { isSignIn?: Boolean }) => (
+  <View className="mt-4 mb-7">
+    <Heading level={3} className="text-2xl! font-bold!">
+      <LogoDiv />
+    </Heading>
+    <p className="text-muted-foreground mt-2">
+      <span className="font-bold">Welcome!</span> Please sign{" "}
+      {isSignIn ? "in" : "up"} to continue
+    </p>
+  </View>
+);
 
-    return (
-      <View className="mt-4 mb-7">
-        <Heading level={3} className="text-2xl! font-bold!">
-          <LogoDiv />
-        </Heading>
-        <p className="text-muted-foreground mt-2">
-          <span className="font-bold">Welcome!</span> Please sign{" "}
-          {isSignIn ? "in" : "up"} to continue
-        </p>
-      </View>
-    );
-  },
+const components = {
   SignIn: {
+    Header() {
+      return <HeaderComponent isSignIn />;
+    },
     Footer() {
       const { toSignUp } = useAuthenticator();
 
@@ -63,6 +62,9 @@ const components = {
     },
   },
   SignUp: {
+    Header() {
+      return <HeaderComponent />;
+    },
     FormFields() {
       const { validationErrors } = useAuthenticator();
       const roleErrorMessage = validationErrors?.["custom:role"];
@@ -134,12 +136,6 @@ const formFields = {
       order: 3,
       placeholder: "Create a password",
       label: "Password",
-      isRequired: true,
-    },
-    confirmPassword: {
-      order: 4,
-      placeholder: "Confirm your password",
-      label: "Confirm Password",
       isRequired: true,
     },
   },
