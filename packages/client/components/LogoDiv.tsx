@@ -1,14 +1,18 @@
 import Link from "next/link";
 import { Logo } from "./Icons";
 
-const LogoDiv = () => (
+interface LogoDivProps {
+  isTextForeground?: Boolean;
+}
+
+const LogoDiv = ({ isTextForeground = true }: LogoDivProps) => (
   <Link href="/" className="cursor-pointer" scroll={false}>
     {/* logo div */}
-    <div className="group flex items-center gap-3 text-white">
+    <div className={`group flex items-center gap-3 ${isTextForeground? "text-foreground" : "text-background"}`}>
       <Logo
         aria-label="VelRent Logo"
         role="img"
-        className="size-6 group-hover:text-primary-300! "
+        className="size-6 group-hover:text-primary-300!"
       />
       <div className="text-xl font-bold group-hover:text-primary-300 ">
         VEL
