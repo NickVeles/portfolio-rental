@@ -9,10 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^6.13.2",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@hookform/resolvers": "^5.2.2",
+    "@portfolio-rental/shared": "*",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-checkbox": "^1.3.3",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -28,6 +30,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@reduxjs/toolkit": "^2.11.2",
+    "aws-amplify": "^6.16.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -50,8 +53,7 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.2.1",
-    "@portfolio-rental/shared": "*"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
