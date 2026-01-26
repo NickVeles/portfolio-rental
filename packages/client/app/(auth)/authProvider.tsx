@@ -141,6 +141,24 @@ const formFields = {
   },
 };
 
+const services = {
+  async validateCustomSignUp(formData: Record<string, string>) {
+    const errors: Record<string, string> = {};
+    const username = formData.username;
+
+    if (username) {
+      if (username.includes(" ")) {
+        errors.username = "Username cannot contain spaces";
+      } else if (!/^[\p{L}\p{M}\p{S}\p{N}\p{P}]+$/u.test(username)) {
+        errors.username =
+          "Username can only contain letters, numbers, and special characters";
+      }
+    }
+
+    return errors;
+  },
+};
+
 const Auth = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthenticator((context) => [context.user]);
   const router = useRouter();
@@ -168,6 +186,7 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
         initialState={pathname.includes("sign-up") ? "signUp" : "signIn"}
         components={components}
         formFields={formFields}
+        services={services}
       >
         {() => <>{children}</>}
       </Authenticator>
