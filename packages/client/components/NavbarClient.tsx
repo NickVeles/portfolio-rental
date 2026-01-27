@@ -24,6 +24,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { SidebarTrigger } from "./ui/sidebar";
+import { Separator } from "./ui/separator";
 
 interface NavbarClientProps {
   initialUser: User | null;
@@ -63,27 +64,30 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
 
           {/* Search/Add button */}
           {isDashboardPage && authUser && (
-            <Button
-              variant="outline"
-              className="text-foreground size-9 md:w-auto flex items-center justify-center gap-2 cursor-pointer"
-              onClick={() =>
-                router.push(
-                  isUserManager ? "/managers/new-property" : "/search",
-                )
-              }
-            >
-              {isUserManager ? (
-                <>
-                  <Plus className="size-5" />
-                  <span className="hidden md:flex">Add New Property</span>
-                </>
-              ) : (
-                <>
-                  <Search className="size-5" />
-                  <span className="hidden md:flex">Search Properties</span>
-                </>
-              )}
-            </Button>
+            <>
+              <Separator orientation="vertical" style={{ height: 24 }} />
+              <Button
+                variant="outline"
+                className="text-foreground size-9 md:w-auto flex items-center justify-center gap-2 cursor-pointer"
+                onClick={() =>
+                  router.push(
+                    isUserManager ? "/managers/new-property" : "/search",
+                  )
+                }
+              >
+                {isUserManager ? (
+                  <>
+                    <Plus className="size-5" />
+                    <span className="hidden md:flex">Add New Property</span>
+                  </>
+                ) : (
+                  <>
+                    <Search className="size-5" />
+                    <span className="hidden md:flex">Search Properties</span>
+                  </>
+                )}
+              </Button>
+            </>
           )}
         </div>
         {!isDashboardPage && (
