@@ -16,15 +16,20 @@ import LogoDiv from "@/components/LogoDiv";
 import { usePathname, useRouter } from "next/navigation";
 
 // https://docs.amplify.aws/gen1/javascript/tools/libraries/configure-categories/
-Amplify.configure({
-  Auth: {
-    Cognito: {
-      userPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_ID!,
-      userPoolClientId:
-        process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_CLIENT_ID!,
+Amplify.configure(
+  {
+    Auth: {
+      Cognito: {
+        userPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_ID!,
+        userPoolClientId:
+          process.env.NEXT_PUBLIC_AWS_COGNITO_USER_POOL_CLIENT_ID!,
+      },
     },
   },
-});
+  {
+    ssr: true,
+  },
+);
 
 const HeaderComponent = ({ isSignIn = false }: { isSignIn?: Boolean }) => (
   <View className="mt-4 mb-7">
