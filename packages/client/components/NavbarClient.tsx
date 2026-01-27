@@ -14,7 +14,7 @@ import {
   Plus,
   Search,
   Settings,
-  Star,
+  Heart,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -132,7 +132,7 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
                         router.push("/tenants/favorites", { scroll: false })
                       }
                     >
-                      <Star className="size-5" />
+                      <Heart className="size-5" />
                       Favorites
                     </DropdownMenuItem>
                   )}
