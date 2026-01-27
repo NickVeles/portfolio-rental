@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
   faInstagram,
-  faTwitter,
+  faXTwitter,
   faLinkedin,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
@@ -19,7 +19,7 @@ const navLinks = [
 const socialMediaLinks = [
   { label: "Facebook", icon: faFacebook, href: "https://nickveles.com" },
   { label: "Instagram", icon: faInstagram, href: "https://nickveles.com" },
-  { label: "Twitter", icon: faTwitter, href: "https://nickveles.com" },
+  { label: "Twitter", icon: faXTwitter, href: "https://nickveles.com" },
   { label: "LinkedIn", icon: faLinkedin, href: "https://nickveles.com" },
   { label: "YouTube", icon: faYoutube, href: "https://nickveles.com" },
 ];
