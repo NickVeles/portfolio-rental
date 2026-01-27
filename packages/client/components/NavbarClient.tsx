@@ -64,8 +64,8 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
           {/* Search/Add button */}
           {isDashboardPage && authUser && (
             <Button
-              variant="secondary"
-              className="flex items-center justify-start gap-2"
+              variant="outline"
+              className="text-foreground size-9 md:w-auto flex items-center justify-center gap-2 cursor-pointer"
               onClick={() =>
                 router.push(
                   isUserManager ? "/managers/new-property" : "/search",
@@ -74,12 +74,12 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
             >
               {isUserManager ? (
                 <>
-                  <Plus className="size-4" />
+                  <Plus className="size-5" />
                   <span className="hidden md:flex">Add New Property</span>
                 </>
               ) : (
                 <>
-                  <Search className="size-4" />
+                  <Search className="size-5" />
                   <span className="hidden md:flex">Search Properties</span>
                 </>
               )}
