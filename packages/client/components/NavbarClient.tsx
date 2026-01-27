@@ -47,7 +47,8 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
   return (
     <div className="fixed top-0 left-0 w-full z-45 shadow-xl">
       <div
-        className={`flex justify-between items-center w-full py-3 px-8 bg-primary-700 text-background min-h-[${NAVBAR_HEIGHT}px]`}
+        className="flex justify-between items-center w-full py-3 px-8 bg-primary-700 text-background"
+        style={{ minHeight: NAVBAR_HEIGHT }}
       >
         <div className="flex items-center gap-4 md:gap-6">
           {/* Dashboard Sidebar */}
