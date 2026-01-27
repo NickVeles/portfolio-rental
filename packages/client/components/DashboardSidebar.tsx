@@ -6,6 +6,7 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
+  SidebarSeparator,
   useSidebar,
 } from "./ui/sidebar";
 import {
@@ -81,40 +82,41 @@ const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
       }}
     >
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem
-            className={cn(
-              "flex flex-nowrap min-h-14 w-full items-center pt-3 mb-3",
-              open ? "justify-between px-6" : "justify-center",
-            )}
-          >
-            {open ? (
-              <>
-                <h1 className="text-xl font-bold text-gray-800 text-nowrap">
-                  {userType === "manager" ? "Manager View" : "Renter View"}
-                </h1>
-                <Button
-                  aria-label="Close sidebar"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => toggleSidebar()}
-                >
-                  <X className="min-h-4 min-w-4" />
-                </Button>
-              </>
-            ) : (
+        <div
+          className={cn(
+            "flex flex-nowrap min-h-14 items-center overflow-hidden",
+            open ? "justify-between px-2" : "justify-center",
+          )}
+        >
+          {open ? (
+            <>
+              <h1 className="text-xl font-bold text-gray-800 text-nowrap">
+                {userType === "manager" ? "Manager View" : "Renter View"}
+              </h1>
               <Button
-                aria-label="Open sidebar"
+                aria-label="Close sidebar"
+                className="cursor-pointer"
                 variant="ghost"
                 size="icon"
                 onClick={() => toggleSidebar()}
               >
-                <Menu className="min-h-4 min-w-4" />
+                <X className="size-5" />
               </Button>
-            )}
-          </SidebarMenuItem>
-        </SidebarMenu>
+            </>
+          ) : (
+            <Button
+              aria-label="Open sidebar"
+              className="cursor-pointer"
+              variant="ghost"
+              size="icon"
+              onClick={() => toggleSidebar()}
+            >
+              <Menu className="size-5" />
+            </Button>
+          )}
+        </div>
       </SidebarHeader>
+      <SidebarSeparator className="m-0" />
     </Sidebar>
   );
 };
