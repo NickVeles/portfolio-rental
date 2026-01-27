@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "aws-amplify/auth";
 import {
   Bell,
-  House,
+  Building2,
   LogOut,
   MessageCircle,
   Plus,
@@ -123,7 +123,7 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
                         router.push("/managers/properties", { scroll: false })
                       }
                     >
-                      <House className="size-5" />
+                      <Building2 className="size-5" />
                       Your Properties
                     </DropdownMenuItem>
                   ) : (
