@@ -8,18 +8,18 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "aws-amplify/auth";
 import {
   Bell,
-  Building2,
   LogOut,
   MessageCircle,
   Plus,
   Search,
   Settings,
-  Heart,
+  LayoutPanelLeft,
 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
@@ -116,26 +116,21 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
                   </p>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="z-50 *:cursor-pointer font-bold *:flex *:items-center *:justify-start *:gap-2 *:pr-4 *:hover:bg-primary-100">
-                  {/* Properties/Favorites */}
-                  {isUserManager ? (
-                    <DropdownMenuItem
-                      onClick={() =>
-                        router.push("/managers/properties", { scroll: false })
-                      }
-                    >
-                      <Building2 className="size-5" />
-                      Your Properties
-                    </DropdownMenuItem>
-                  ) : (
-                    <DropdownMenuItem
-                      onClick={() =>
-                        router.push("/tenants/favorites", { scroll: false })
-                      }
-                    >
-                      <Heart className="size-5" />
-                      Favorites
-                    </DropdownMenuItem>
-                  )}
+                  {/* Dashboard */}
+                  <DropdownMenuItem
+                    onClick={() =>
+                      router.push(
+                        isUserManager
+                          ? "/managers/properties"
+                          : "/tenants/favorites",
+                        { scroll: false },
+                      )
+                    }
+                  >
+                    <LayoutPanelLeft className="size-5" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={() =>
                       router.push(
