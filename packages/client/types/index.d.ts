@@ -11,8 +11,8 @@ declare module "framer-motion" {
 declare global {
   interface User {
     cognitoInfo: AuthUser;
-    userInfo: JsonObject | JsonPrimitive | JsonArray;
-    userRole: Tenant | Manager;
+    userInfo: Tenant | Manager;
+    userRole: JsonObject | JsonPrimitive | JsonArray;
   }
 }
 
