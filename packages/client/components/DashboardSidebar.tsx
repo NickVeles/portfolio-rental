@@ -121,7 +121,7 @@ const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
       </SidebarHeader>
       <SidebarSeparator className="mx-0" />
       <SidebarContent>
-        <SidebarMenu className="py-2">
+        <SidebarMenu className="p-2">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
 
