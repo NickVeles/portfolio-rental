@@ -3,8 +3,10 @@
 import { usePathname } from "next/navigation";
 import {
   Sidebar,
+  SidebarContent,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
   useSidebar,
@@ -21,6 +23,7 @@ import {
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 interface DashboardSidebarProps {
   userType: "manager" | "tenant";
@@ -116,7 +119,39 @@ const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
           )}
         </div>
       </SidebarHeader>
-      <SidebarSeparator className="m-0" />
+      <SidebarSeparator className="mx-0" />
+      <SidebarContent>
+        <SidebarMenu className="py-2">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <SidebarMenuItem
+                key={link.label}
+                className="flex justify-center w-full"
+              >
+                <SidebarMenuButton
+                  asChild
+                  aria-label={`Go to ${link.label}`}
+                  className={cn(
+                    "flex items-center px-3 py-6 text-foreground",
+                    isActive ? "bg-secondary-200 hover:bg-secondary-300" : "",
+                  )}
+                >
+                  <Link
+                    href={link.href}
+                    className="w-full text-nowrap"
+                    scroll={false}
+                  >
+                    <link.icon className="size-5" />
+                    {open && link.label}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          })}
+        </SidebarMenu>
+      </SidebarContent>
     </Sidebar>
   );
 };
