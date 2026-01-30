@@ -150,13 +150,46 @@ const services = {
   async validateCustomSignUp(formData: Record<string, string>) {
     const errors: Record<string, string> = {};
     const username = formData.username;
+    const email = formData.email;
+    const password = formData.password;
 
     if (username) {
-      if (username.includes(" ")) {
-        errors.username = "Username cannot contain spaces";
-      } else if (!/^[\p{L}\p{M}\p{S}\p{N}\p{P}]+$/u.test(username)) {
+      if (username.length > 15) {
+        errors.username = "Username must be 15 characters or less.";
+      } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
         errors.username =
-          "Username can only contain letters, numbers, and special characters";
+          "Username can only contain letters (a-z, A-Z), numbers, and underscores.";
+      }
+    }
+
+    if (email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errors.email = "Please enter a valid email address.";
+      }
+    }
+
+    if (password) {
+      if (password.length < 8) {
+        errors.password = "Password must be at least 8 characters long.";
+      } else if (password.length > 64) {
+        errors.password = "Password must be 64 characters or less.";
+      } else if (/\s/.test(password)) {
+        errors.password = "Password cannot contain spaces.";
+      } else if (!/^[\x21-\x7E]+$/.test(password)) {
+        const invalidChars = password
+          .split("")
+          .filter((char) => !/[\x21-\x7E]/.test(char));
+        const uniqueInvalidChars = [...new Set(invalidChars)].join(", ");
+        errors.password = `Password cannot contain ${uniqueInvalidChars}.`;
+      } else if (!/[A-Z]/.test(password)) {
+        errors.password = "Password must contain at least 1 uppercase letter.";
+      } else if (!/[a-z]/.test(password)) {
+        errors.password = "Password must contain at least 1 lowercase letter.";
+      } else if (!/[0-9]/.test(password)) {
+        errors.password = "Password must contain at least 1 number.";
+      } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(password)) {
+        errors.password = "Password must contain at least 1 special character.";
       }
     }
 
