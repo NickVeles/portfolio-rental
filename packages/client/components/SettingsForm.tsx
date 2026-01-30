@@ -14,6 +14,9 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
+import { CustomFormField } from "./FormField";
+
+// TODO: Add password
 
 interface SettingsFormProps {
   initialData: SettingsFormData;
@@ -57,17 +60,34 @@ const SettingsForm = ({
           <form
             onSubmit={form.handleSubmit(handleSubmit)}
             className="space-y-6"
-          ></form>
+          >
+            <CustomFormField name="name" label="Username" disabled={true} />
+            <CustomFormField
+              name="email"
+              label="Email"
+              type="email"
+              disabled={!editMode}
+            />
+            <CustomFormField
+              name="phoneNumber"
+              label="Phone Number"
+              disabled={!editMode}
+            />
+          </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex justify-between items-center gap-2">
+      <CardFooter className="flex-row gap-2">
+        <p>
+          Note: You cannot edit your username or role ({userType}). Please
+          create a separate account for these purposes.
+        </p>
         {editMode ? (
-          <>
+          <div className="flex justify-between items-center gap-2">
             <Button type="submit">Save</Button>
             <Button variant="outline" onClick={toggleEditMode}>
               Cancel
             </Button>
-          </>
+          </div>
         ) : (
           <Button onClick={toggleEditMode}>Edit</Button>
         )}
