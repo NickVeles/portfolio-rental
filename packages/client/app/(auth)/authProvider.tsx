@@ -154,7 +154,10 @@ const services = {
     const password = formData.password;
 
     if (username) {
-      if (username.length > 15) {
+      if (username.length < 3) {
+        errors.username = "Username must be at least 3 characters long.";
+      }
+      else if (username.length > 15) {
         errors.username = "Username must be 15 characters or less.";
       } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
         errors.username =
