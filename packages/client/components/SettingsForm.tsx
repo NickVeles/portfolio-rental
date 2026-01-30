@@ -85,27 +85,32 @@ const SettingsForm = ({
             create a separate account for these purposes.
           </p>
           <div className="flex w-full items-center gap-2 justify-start">
-            {editMode ? (
-              <>
-                <Button
-                  type="submit"
-                  form="settings-form"
-                  className="border bg-green-50 hover:bg-green-100"
-                >
-                  Save
-                </Button>
-                <Button variant="outline" onClick={toggleEditMode}>
-                  Cancel
-                </Button>
-              </>
-            ) : (
-              <Button
-                onClick={toggleEditMode}
-                className="border bg-blue-50 hover:bg-blue-100"
-              >
-                Edit
-              </Button>
-            )}
+            <Button
+              type="button"
+              onClick={() => form.handleSubmit(handleSubmit)()}
+              className={cn(
+                "border bg-green-50 hover:bg-green-100",
+                !editMode && "hidden"
+              )}
+            >
+              Save
+            </Button>
+            <Button
+              variant="outline"
+              onClick={toggleEditMode}
+              className={cn(!editMode && "hidden")}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={toggleEditMode}
+              className={cn(
+                "border bg-blue-50 hover:bg-blue-100",
+                editMode && "hidden"
+              )}
+            >
+              Edit
+            </Button>
           </div>
         </CardFooter>
       </Card>
