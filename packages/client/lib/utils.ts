@@ -25,13 +25,13 @@ export function cleanParams(params: Record<string, any>): Record<string, any> {
   return Object.fromEntries(
     Object.entries(params).filter(
       (
-        [_, value] // eslint-disable-line @typescript-eslint/no-unused-vars
+        [_, value], // eslint-disable-line @typescript-eslint/no-unused-vars
       ) =>
         value !== undefined &&
         value !== "any" &&
         value !== "" &&
-        (Array.isArray(value) ? value.some((v) => v !== null) : value !== null)
-    )
+        (Array.isArray(value) ? value.some((v) => v !== null) : value !== null),
+    ),
   );
 }
 
@@ -42,7 +42,7 @@ type MutationMessages = {
 
 export const withToast = async <T>(
   mutationFn: Promise<T>,
-  messages: Partial<MutationMessages>
+  messages: Partial<MutationMessages>,
 ) => {
   const { success, error } = messages;
 
@@ -54,4 +54,14 @@ export const withToast = async <T>(
     if (error) toast.error(error);
     throw err;
   }
+};
+
+export const Capitalize = (str: string): string => {
+  return str
+    .split(" ")
+    .map((word) => {
+      if (word.length === 0) return "";
+      return word[0].toUpperCase() + word.slice(1);
+    })
+    .join(" ");
 };
