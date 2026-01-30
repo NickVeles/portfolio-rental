@@ -6,15 +6,19 @@ import {
   LogOut,
   Settings,
   LayoutPanelLeft,
+  CircleUser,
 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
+import { Capitalize, cn } from "@/lib/utils";
 
 interface UserButtonProps {
   user: User;
@@ -40,39 +44,49 @@ function UserButton({ user }: UserButtonProps) {
             {user.userInfo?.name[0].toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <p className="text-background hidden md:flex group-hover:underline underline-offset-2">
-          {user.userInfo?.name}
-        </p>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="z-50 *:cursor-pointer font-bold *:flex *:items-center *:justify-start *:gap-2 *:pr-4 *:hover:bg-primary-100">
-        {/* Dashboard */}
-        <DropdownMenuItem
-          onClick={() =>
-            router.push(
-              isUserManager ? "/managers/properties" : "/tenants/favorites",
-              { scroll: false },
-            )
-          }
-        >
-          <LayoutPanelLeft className="size-5" />
-          Dashboard
-        </DropdownMenuItem>
+      <DropdownMenuContent className="z-50">
+        <DropdownMenuLabel className="pl-4">
+          <p className="text-lg">{user.userInfo?.name}</p>
+          <p className="inline-flex items-center gap-1">
+            <CircleUser
+              className={cn(
+                "size-4",
+                isUserManager ? "text-secondary-700" : "text-primary-700",
+              )}
+            />
+            {Capitalize(user.userRole)}
+          </p>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() =>
-            router.push(`/${user.userRole?.toLowerCase()}s/settings`)
-          }
-        >
-          <Settings className="size-5" />
-          Settings
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="text-secondary-700!"
-          onClick={handleSignOut}
-        >
-          <LogOut className="size-5 text-inherit" />
-          Sign Out
-        </DropdownMenuItem>
+        <DropdownMenuGroup className="*:cursor-pointer font-bold *:flex *:items-center *:justify-start *:gap-2 *:pr-4 *:hover:bg-primary-100">
+          <DropdownMenuItem
+            onClick={() =>
+              router.push(
+                isUserManager ? "/managers/properties" : "/tenants/favorites",
+                { scroll: false },
+              )
+            }
+          >
+            <LayoutPanelLeft className="size-5" />
+            Dashboard
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() =>
+              router.push(`/${user.userRole?.toLowerCase()}s/settings`)
+            }
+          >
+            <Settings className="size-5" />
+            Settings
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="text-secondary-700!"
+            onClick={handleSignOut}
+          >
+            <LogOut className="size-5 text-inherit" />
+            Sign Out
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
