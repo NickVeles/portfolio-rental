@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import LogoDiv from "./LogoDiv";
 import { usePathname, useRouter } from "next/navigation";
-import { Plus, Search } from "lucide-react";
+import { Bell, MessageCircle, Plus, Search } from "lucide-react";
 import { SidebarTrigger } from "./ui/sidebar";
 import { Separator } from "./ui/separator";
 import UserButton from "./UserButton";
@@ -75,7 +75,17 @@ function NavbarClient({ initialUser }: NavbarClientProps) {
         )}
         <div className="flex items-center gap-5">
           {authUser ? (
-            <UserButton user={authUser} />
+            <>
+              <div className="relative hidden md:flex group cursor-pointer">
+                <MessageCircle className="size-6 text-background group-hover:text-primary-300" />
+                <span className="absolute top-0 right-0 size-2 bg-secondary-700 rounded-full" />
+              </div>
+              <div className="relative hidden md:flex group cursor-pointer">
+                <Bell className="size-6 text-background group-hover:text-primary-300" />
+                <span className="absolute top-0 right-0 size-2 bg-secondary-700 rounded-full" />
+              </div>
+              <UserButton user={authUser} />
+            </>
           ) : (
             <>
               <Button
