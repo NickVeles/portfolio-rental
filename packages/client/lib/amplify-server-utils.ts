@@ -45,12 +45,40 @@ export async function getAuthenticatedUser(): Promise<User | null> {
             },
           );
 
-          if (!response.ok) {
-            // User not found in database yet
-            return null;
-          }
+          let userInfo;
 
-          const userInfo = await response.json();
+          if (response.status === 404) {
+            // User not found in database yet, create them
+            const createEndpoint =
+              userRole === "manager" ? "/managers" : "/tenants";
+
+            const createResponse = await fetch(
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}${createEndpoint}`,
+              {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${idToken}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  cognitoId: user.userId,
+                  name: user.username,
+                  email: idToken.payload.email || "",
+                  phoneNumber: "",
+                }),
+              },
+            );
+
+            if (!createResponse.ok) {
+              return null;
+            }
+
+            userInfo = await createResponse.json();
+          } else if (!response.ok) {
+            return null;
+          } else {
+            userInfo = await response.json();
+          }
 
           return {
             cognitoInfo: { ...user },

@@ -1,4 +1,3 @@
-import { createNewUserInDatabase } from "@/lib/utils";
 import { Manager, Tenant } from "@portfolio-rental/shared";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
@@ -31,19 +30,10 @@ export const api = createApi({
               ? `/managers/${user.userId}`
               : `/tenants/${user.userId}`;
 
-          let userDetailsResponse = await fetchWithBQ(endpoint);
+          const userDetailsResponse = await fetchWithBQ(endpoint);
 
-          // if user doesn't exist, create new user in db
-          if (
-            userDetailsResponse.error &&
-            userDetailsResponse.error.status === 404
-          ) {
-            userDetailsResponse = await createNewUserInDatabase(
-              user,
-              idToken,
-              userRole,
-              fetchWithBQ,
-            );
+          if (userDetailsResponse.error) {
+            return { error: userDetailsResponse.error };
           }
 
           return {
