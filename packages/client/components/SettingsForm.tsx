@@ -49,7 +49,7 @@ const SettingsForm = ({
   };
 
   return (
-    <div className="p-8">
+    <div className="p-2 sm:p-8">
       <Card className="w-full">
         <CardHeader>
           <CardTitle>{Capitalize(userType)} Settings</CardTitle>
