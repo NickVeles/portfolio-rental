@@ -49,8 +49,8 @@ const SettingsForm = ({
   };
 
   return (
-    <div className="p-2 sm:p-6">
-      <Card className="w-full">
+    <div className="p-2 sm:p-6 w-full flex justify-center">
+      <Card className="w-full max-w-2xl">
         <CardHeader>
           <CardTitle className="text-lg">{Capitalize(userType)} Settings</CardTitle>
           <CardDescription>
