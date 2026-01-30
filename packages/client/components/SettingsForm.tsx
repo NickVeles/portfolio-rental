@@ -4,7 +4,8 @@ import { SettingsFormData, settingsSchema } from "@/lib/schemas";
 import { Capitalize } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { Form } from "./ui/form";
 import {
   Card,
   CardContent,
