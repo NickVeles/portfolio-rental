@@ -79,10 +79,11 @@ const SettingsForm = ({
             </form>
           </Form>
         </CardContent>
-        <CardFooter className="flex-col gap-2">
+        <CardFooter className="flex-col gap-6">
           <p>
-            Note: You cannot edit your username or role ({userType}). Please
-            create a separate account for these purposes.
+            Note: You cannot edit your username or role ({userType}). If you
+            want to become a {userType === "manager" ? "tenant" : "manager"},
+            please create a new account.
           </p>
           <div className="flex w-full items-center gap-2 justify-start">
             <Button
@@ -90,7 +91,7 @@ const SettingsForm = ({
               onClick={() => form.handleSubmit(handleSubmit)()}
               className={cn(
                 "border bg-green-50 hover:bg-green-100",
-                !editMode && "hidden"
+                !editMode && "hidden",
               )}
             >
               Save
@@ -106,7 +107,7 @@ const SettingsForm = ({
               onClick={toggleEditMode}
               className={cn(
                 "border bg-blue-50 hover:bg-blue-100",
-                editMode && "hidden"
+                editMode && "hidden",
               )}
             >
               Edit
