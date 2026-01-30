@@ -63,7 +63,8 @@ export const settingsSchema = z.object({
     .min(
       PHONE_NUMBER_LENGTH,
       `Phone number must be at least ${PHONE_NUMBER_LENGTH} digits.`,
-    ),
+    )
+    .or(z.literal("")),
 });
 
 export type SettingsFormData = z.infer<typeof settingsSchema>;
