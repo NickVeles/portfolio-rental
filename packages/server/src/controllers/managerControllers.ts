@@ -1,6 +1,8 @@
 import type { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
+// TODO: Add email, phone number, and password change to AWS
+
 const prisma = new PrismaClient();
 
 export const getManager = async (
@@ -57,5 +59,35 @@ export const createManager = async (
     res
       .status(500)
       .json({ message: `Error creating manager: ${error.message}` });
+  }
+};
+
+export const updateManager = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const { cognitoId } = req.params;
+    const { name, email, phoneNumber } = req.body;
+
+    if (typeof cognitoId !== "string") {
+      res.status(400).json({ message: "Invalid cognitoId" });
+      return;
+    }
+
+    const updateManager = await prisma.manager.update({
+      where: { cognitoId },
+      data: {
+        name,
+        email,
+        phoneNumber,
+      },
+    });
+
+    res.json(updateManager);
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: `Error updating manager: ${error.message}` });
   }
 };
