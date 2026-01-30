@@ -46,7 +46,7 @@ function UserButton({ user }: UserButtonProps) {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-50">
-        <DropdownMenuLabel className="pl-4">
+        <DropdownMenuLabel className="pl-4 pb-0">
           <p className="text-lg">{user.userInfo?.name}</p>
           <p className="inline-flex items-center gap-1">
             <CircleUser
