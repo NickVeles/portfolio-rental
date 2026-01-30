@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import {
   Sidebar,
@@ -31,7 +32,7 @@ interface DashboardSidebarProps {
 
 const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
   const pathname = usePathname();
-  const { toggleSidebar, open } = useSidebar();
+  const { toggleSidebar, open, isMobile } = useSidebar();
 
   const navLinks =
     userType === "manager"
@@ -139,6 +140,9 @@ const DashboardSidebar = ({ userType }: DashboardSidebarProps) => {
                   )}
                 >
                   <Link
+                    onClick={() => {
+                      if (isMobile) toggleSidebar();
+                    }}
                     href={link.href}
                     className="w-full text-nowrap"
                     scroll={false}
