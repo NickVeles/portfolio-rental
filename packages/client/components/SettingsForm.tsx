@@ -1,7 +1,7 @@
 "use client";
 
 import { SettingsFormData, settingsSchema } from "@/lib/schemas";
-import { Capitalize } from "@/lib/utils";
+import { Capitalize, cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -49,51 +49,67 @@ const SettingsForm = ({
   };
 
   return (
-    <Card className="w-full m-8">
-      <CardHeader>
-        <CardTitle>{Capitalize(userType)} Settings</CardTitle>
-        <CardDescription>
-          Manage your account preferences and personal information
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleSubmit)}
-            className="space-y-6"
-          >
-            <CustomFormField name="name" label="Username" disabled={true} />
-            <CustomFormField
-              name="email"
-              label="Email"
-              type="email"
-              disabled={!editMode}
-            />
-            <CustomFormField
-              name="phoneNumber"
-              label="Phone Number"
-              disabled={!editMode}
-            />
-          </form>
-        </Form>
-      </CardContent>
-      <CardFooter className="flex-row gap-2">
-        <p>
-          Note: You cannot edit your username or role ({userType}). Please
-          create a separate account for these purposes.
-        </p>
-        {editMode ? (
-          <div className="flex justify-between items-center gap-2">
-            <Button type="submit">Save</Button>
-            <Button variant="outline" onClick={toggleEditMode}>
-              Cancel
-            </Button>
+    <div className="p-8">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle>{Capitalize(userType)} Settings</CardTitle>
+          <CardDescription>
+            Manage your account preferences and personal information
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form
+              id="settings-form"
+              onSubmit={form.handleSubmit(handleSubmit)}
+              className="space-y-6"
+            >
+              <CustomFormField name="name" label="Username" disabled={true} />
+              <CustomFormField
+                name="email"
+                label="Email"
+                type="email"
+                disabled={!editMode}
+              />
+              <CustomFormField
+                name="phoneNumber"
+                label="Phone Number"
+                disabled={!editMode}
+              />
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter className="flex-col gap-2">
+          <p>
+            Note: You cannot edit your username or role ({userType}). Please
+            create a separate account for these purposes.
+          </p>
+          <div className="flex w-full items-center gap-2 justify-start">
+            {editMode ? (
+              <>
+                <Button
+                  type="submit"
+                  form="settings-form"
+                  className="border bg-green-50 hover:bg-green-100"
+                >
+                  Save
+                </Button>
+                <Button variant="outline" onClick={toggleEditMode}>
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <Button
+                onClick={toggleEditMode}
+                className="border bg-blue-50 hover:bg-blue-100"
+              >
+                Edit
+              </Button>
+            )}
           </div>
-        ) : (
-          <Button onClick={toggleEditMode}>Edit</Button>
-        )}
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      </Card>
+    </div>
   );
 };
 
