@@ -100,3 +100,11 @@ export const testUsers = {
 };
 
 export const PHONE_NUMBER_LENGTH = 9;
+export const USERNAME_MIN_LENGTH = 3;
+export const USERNAME_MAX_LENGTH = 15;
+export const USERNAME_ALLOWED_CHARS_REGEX = /^[a-zA-Z0-9_]+$/;
+export const PASSWORD_MIN_LENGTH = 8;
+export const PASSWORD_MAX_LENGTH = 64;
+export const PASSWORD_ALLOWED_CHARS_REGEX = /^[\x21-\x7E]+$/;
+export const PASSWORD_ALLOWED_SPECIAL_CHARS_REGEX =
+  /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/;

@@ -14,6 +14,15 @@ import {
 import "@aws-amplify/ui-react/styles.css";
 import LogoDiv from "@/components/LogoDiv";
 import { usePathname, useRouter } from "next/navigation";
+import {
+  PASSWORD_ALLOWED_CHARS_REGEX,
+  PASSWORD_ALLOWED_SPECIAL_CHARS_REGEX,
+  PASSWORD_MAX_LENGTH,
+  PASSWORD_MIN_LENGTH,
+  USERNAME_ALLOWED_CHARS_REGEX,
+  USERNAME_MAX_LENGTH,
+  USERNAME_MIN_LENGTH,
+} from "@/lib/constants";
 
 // https://docs.amplify.aws/gen1/javascript/tools/libraries/configure-categories/
 Amplify.configure(
@@ -154,12 +163,11 @@ const services = {
     const password = formData.password;
 
     if (username) {
-      if (username.length < 3) {
-        errors.username = "Username must be at least 3 characters long.";
-      }
-      else if (username.length > 15) {
-        errors.username = "Username must be 15 characters or less.";
-      } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      if (username.length < USERNAME_MIN_LENGTH) {
+        errors.username = `Username must be at least ${USERNAME_MIN_LENGTH} characters long.`;
+      } else if (username.length > USERNAME_MAX_LENGTH) {
+        errors.username = `Username must be ${USERNAME_MAX_LENGTH} characters or less.`;
+      } else if (!USERNAME_ALLOWED_CHARS_REGEX.test(username)) {
         errors.username =
           "Username can only contain letters (a-z, A-Z), numbers, and underscores.";
       }
@@ -173,16 +181,16 @@ const services = {
     }
 
     if (password) {
-      if (password.length < 8) {
-        errors.password = "Password must be at least 8 characters long.";
-      } else if (password.length > 64) {
-        errors.password = "Password must be 64 characters or less.";
+      if (password.length < PASSWORD_MIN_LENGTH) {
+        errors.password = `Password must be at least ${PASSWORD_MIN_LENGTH} characters long.`;
+      } else if (password.length > PASSWORD_MAX_LENGTH) {
+        errors.password = `Password must be ${PASSWORD_MAX_LENGTH} characters or less.`;
       } else if (/\s/.test(password)) {
         errors.password = "Password cannot contain spaces.";
-      } else if (!/^[\x21-\x7E]+$/.test(password)) {
+      } else if (!PASSWORD_ALLOWED_CHARS_REGEX.test(password)) {
         const invalidChars = password
           .split("")
-          .filter((char) => !/[\x21-\x7E]/.test(char));
+          .filter((char) => !PASSWORD_ALLOWED_CHARS_REGEX.test(char));
         const uniqueInvalidChars = [...new Set(invalidChars)].join(", ");
         errors.password = `Password cannot contain ${uniqueInvalidChars}.`;
       } else if (!/[A-Z]/.test(password)) {
@@ -191,7 +199,7 @@ const services = {
         errors.password = "Password must contain at least 1 lowercase letter.";
       } else if (!/[0-9]/.test(password)) {
         errors.password = "Password must contain at least 1 number.";
-      } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/.test(password)) {
+      } else if (!PASSWORD_ALLOWED_SPECIAL_CHARS_REGEX.test(password)) {
         errors.password = "Password must contain at least 1 special character.";
       }
     }
