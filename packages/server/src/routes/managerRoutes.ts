@@ -4,13 +4,13 @@ import {
   createManager,
   updateManager,
   getManagerProperties,
-} from "../controllers/managerControllers"
+} from "../controllers/managerControllers";
 
-const router = express.Router();
+const managerRoutes = express.Router();
 
-router.get("/:cognitoId", getManager);
-router.put("/:cognitoId", updateManager);
-router.get("/:cognitoId/properties", getManagerProperties)
-router.post("/", createManager);
+managerRoutes.get("/:cognitoId", getManager);
+managerRoutes.put("/:cognitoId", updateManager);
+managerRoutes.get("/:cognitoId/properties", getManagerProperties);
+managerRoutes.post("/", createManager);
 
-export default router;
+export default managerRoutes;

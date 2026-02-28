@@ -8,13 +8,16 @@ import {
   removeFavoriteProperty,
 } from "../controllers/tenantControllers";
 
-const router = express.Router();
+const tenantRoutes = express.Router();
 
-router.get("/:cognitoId", getTenant);
-router.put("/:cognitoId", updateTenant);
-router.get("/:cognitoId/current-residences", getCurrentResidences);
-router.post("/", createTenant);
-router.post("/:cognitoId/favorites/:propertyId", addFavoriteProperty);
-router.delete("/:cognitoId/favorites/:propertyId", removeFavoriteProperty);
+tenantRoutes.get("/:cognitoId", getTenant);
+tenantRoutes.put("/:cognitoId", updateTenant);
+tenantRoutes.get("/:cognitoId/current-residences", getCurrentResidences);
+tenantRoutes.post("/", createTenant);
+tenantRoutes.post("/:cognitoId/favorites/:propertyId", addFavoriteProperty);
+tenantRoutes.delete(
+  "/:cognitoId/favorites/:propertyId",
+  removeFavoriteProperty,
+);
 
-export default router;
+export default tenantRoutes;

@@ -10,15 +10,15 @@ import multer from "multer";
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-const router = express.Router();
+const propertyRoutes = express.Router();
 
-router.get("/", getProperties);
-router.get("/:id", getProperty);
-router.post(
+propertyRoutes.get("/", getProperties);
+propertyRoutes.get("/:id", getProperty);
+propertyRoutes.post(
   "/",
   authMiddleware(["manager"]),
   upload.array("photos"),
   createProperty,
 );
 
-export default router;
+export default propertyRoutes;
