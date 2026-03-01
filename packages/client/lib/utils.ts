@@ -1,6 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { toast } from "sonner";
+import { debounce } from "lodash";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { FiltersState } from "@/state";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -65,3 +68,19 @@ export const Capitalize = (str: string): string => {
     })
     .join(" ");
 };
+
+export const updateUrl = debounce(
+  (newFilters: FiltersState, router: AppRouterInstance, pathname: string) => {
+    const cleanFilters = cleanParams(newFilters);
+    const updatedSearchParams = new URLSearchParams();
+
+    Object.entries(cleanFilters).forEach(([key, value]) => {
+      updatedSearchParams.set(
+        key,
+        Array.isArray(value) ? value.join(",") : value.toString(),
+      );
+    });
+
+    router.push(`${pathname}?${updatedSearchParams.toString()}`);
+  },
+);
