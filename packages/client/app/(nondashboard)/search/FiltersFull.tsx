@@ -101,7 +101,7 @@ const FiltersFull = () => {
               onClick={handleLocationSearch}
               className="rounded-r-xl rounded-l-none border-l-none border-black shadow-none border hover:bg-primary-700 hover:text-primary-50"
             >
-              <Search className="w-4 h-4" />
+              <Search className="size-4" />
             </Button>
           </div>
         </div>
@@ -126,7 +126,7 @@ const FiltersFull = () => {
                   }))
                 }
               >
-                <Icon className="w-6 h-6 mb-2" />
+                <Icon className="size-6 mb-2" />
                 <span>{type}</span>
               </div>
             ))}
@@ -171,11 +171,11 @@ const FiltersFull = () => {
                 <SelectValue placeholder="Beds" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="any">Any beds</SelectItem>
-                <SelectItem value="1">1+ bed</SelectItem>
-                <SelectItem value="2">2+ beds</SelectItem>
-                <SelectItem value="3">3+ beds</SelectItem>
-                <SelectItem value="4">4+ beds</SelectItem>
+                <SelectItem value="any">Any Beds</SelectItem>
+                <SelectItem value="1">1+ Bed</SelectItem>
+                <SelectItem value="2">2+ Beds</SelectItem>
+                <SelectItem value="3">3+ Beds</SelectItem>
+                <SelectItem value="4">4+ Beds</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -191,10 +191,10 @@ const FiltersFull = () => {
                 <SelectValue placeholder="Baths" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="any">Any baths</SelectItem>
-                <SelectItem value="1">1+ bath</SelectItem>
-                <SelectItem value="2">2+ baths</SelectItem>
-                <SelectItem value="3">3+ baths</SelectItem>
+                <SelectItem value="any">Any Baths</SelectItem>
+                <SelectItem value="1">1+ Bath</SelectItem>
+                <SelectItem value="2">2+ Baths</SelectItem>
+                <SelectItem value="3">3+ Baths</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -240,7 +240,7 @@ const FiltersFull = () => {
                 )}
                 onClick={() => handleAmenityChange(amenity as AmenityEnum)}
               >
-                <Icon className="w-5 h-5 hover:cursor-pointer" />
+                <Icon className="size-5 hover:cursor-pointer" />
                 <Label className="hover:cursor-pointer">
                   {formatEnumString(amenity)}
                 </Label>
