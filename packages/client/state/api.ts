@@ -1,5 +1,5 @@
 import { cleanParams, withToast } from "@/lib/utils";
-import { Manager, Property, Tenant } from "@portfolio-rental/shared";
+import { Manager, PropertyWithLocation, Tenant } from "@portfolio-rental/shared";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 import { FiltersState } from ".";
@@ -53,7 +53,7 @@ export const api = createApi({
 
     // property related endpoints
     getProperties: build.query<
-      Property[],
+      PropertyWithLocation[],
       Partial<FiltersState> & { favoriteIds?: number[] }
     >({
       query: (filters) => {
