@@ -1,5 +1,9 @@
 import { cleanParams, withToast } from "@/lib/utils";
-import { Manager, PropertyWithLocation, Tenant } from "@portfolio-rental/shared";
+import {
+  Manager,
+  PropertyWithLocation,
+  Tenant,
+} from "@portfolio-rental/shared";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 import { FiltersState } from ".";
@@ -19,7 +23,6 @@ export const api = createApi({
   reducerPath: "api",
   tagTypes: ["Managers", "Tenants", "Properties"],
   endpoints: (build) => ({
-
     // GET AUTH USER
     // -------------
     getAuthUser: build.query<User, void>({
@@ -143,6 +146,28 @@ export const api = createApi({
         });
       },
     }),
+
+    // REMOVE FAVORITE PROPERTY
+    // ------------------------
+    removeFavoriteProperty: build.mutation<
+      Tenant,
+      { cognitoId: string; propertyId: number }
+    >({
+      query: ({ cognitoId, propertyId }) => ({
+        url: `tenants/${cognitoId}/favorites/${propertyId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result) => [
+        { type: "Tenants", id: result?.id },
+        { type: "Properties", id: "LIST" },
+      ],
+      async onQueryStarted(_, { queryFulfilled }) {
+        await withToast(queryFulfilled, {
+          success: "Removed from favorites!",
+          error: "Failed to remove from favorites.",
+        });
+      },
+    }),
   }),
 });
 
@@ -151,5 +176,6 @@ export const {
   useGetPropertiesQuery,
   useUpdateManagerMutation,
   useUpdateTenantMutation,
-  useAddFavoritePropertyMutation
+  useAddFavoritePropertyMutation,
+  useRemoveFavoritePropertyMutation,
 } = api;
