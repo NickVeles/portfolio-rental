@@ -112,6 +112,26 @@ export const api = createApi({
       }),
       invalidatesTags: (result) => [{ type: "Managers", id: result?.id }],
     }),
+
+    addFavoriteProperty: build.mutation<
+      Tenant,
+      { cognitoId: string; propertyId: number }
+    >({
+      query: ({ cognitoId, propertyId }) => ({
+        url: `tenants/${cognitoId}/favorites/${propertyId}`,
+        method: "POST",
+      }),
+      invalidatesTags: (result) => [
+        { type: "Tenants", id: result?.id },
+        { type: "Properties", id: "LIST" },
+      ],
+      async onQueryStarted(_, { queryFulfilled }) {
+        await withToast(queryFulfilled, {
+          success: "Added to favorites!",
+          error: "Failed to add to favorites",
+        });
+      },
+    }),
   }),
 });
 
@@ -120,4 +140,5 @@ export const {
   useGetPropertiesQuery,
   useUpdateManagerMutation,
   useUpdateTenantMutation,
+  useAddFavoritePropertyMutation
 } = api;
