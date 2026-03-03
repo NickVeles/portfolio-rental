@@ -96,7 +96,7 @@ const PropertyCard = ({
           </p>
         </div>
         <hr />
-        <div className="flex justify-between items-center gap-4 text-gray-600 mt-5 **:first:size-5 **:first:space-x-2">
+        <div className="flex justify-between items-center gap-4 text-gray-600 mt-5 **:first:size-5 *:space-x-2">
           <span className="flex items-center">
             <Bed />
             {property.beds} Bed
