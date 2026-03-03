@@ -4,7 +4,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useAppSelector } from "@/state/redux";
 import { useGetPropertiesQuery } from "@/state/api";
-import { PropertyWithLocation } from "@portfolio-rental/shared";
+import { Property } from "@portfolio-rental/shared";
 import { Spinner } from "@/components/ui/spinner";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
@@ -28,12 +28,7 @@ const Map = () => {
       zoom: 9,
     });
 
-    properties.forEach((property) => {
-      const marker = createPropertyMarker(property, map);
-      const markerElement = marker.getElement();
-      const path = markerElement.querySelector("path[fill='#3FB1CE']");
-      if (path) path.setAttribute("fill", "#000000");
-    });
+    createPropertyMarkers(properties, map);
 
     const resizeMap = () => {
       if (map) setTimeout(() => map.resize(), 700);
@@ -60,7 +55,7 @@ const Map = () => {
   );
 };
 
-const createPopupContent = (property: PropertyWithLocation): HTMLElement => {
+const createPopupContent = (property: Property): HTMLElement => {
   const container = document.createElement("div");
   container.className = "marker-popup";
 
@@ -92,17 +87,24 @@ const createPopupContent = (property: PropertyWithLocation): HTMLElement => {
   return container;
 };
 
-const createPropertyMarker = (property: PropertyWithLocation, map: mapboxgl.Map) => {
-  const marker = new mapboxgl.Marker()
-    .setLngLat([
-      property.location.coordinates.longitude,
-      property.location.coordinates.latitude,
-    ])
-    .setPopup(
-      new mapboxgl.Popup().setDOMContent(createPopupContent(property))
-    )
-    .addTo(map);
-  return marker;
+const createPropertyMarkers = (properties: Property[], map: mapboxgl.Map) => {
+  properties.forEach((property) => {
+    if (!property.location || !property.location.coordinates) return;
+
+    const marker = new mapboxgl.Marker()
+      .setLngLat([
+        property.location.coordinates.longitude,
+        property.location.coordinates.latitude,
+      ])
+      .setPopup(
+        new mapboxgl.Popup().setDOMContent(createPopupContent(property)),
+      )
+      .addTo(map);
+
+    const markerElement = marker.getElement();
+    const path = markerElement.querySelector("path[fill='#3FB1CE']");
+    if (path) path.setAttribute("fill", "#000000");
+  });
 };
 
 export default Map;

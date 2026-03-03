@@ -1,15 +1,24 @@
-import { Property, Location } from "./generated/prisma";
+import {
+  Property as PrismaProperty,
+  Location as PrismaLocation,
+} from "./generated/prisma";
 
 // Re-export Prisma generated types and enums
 export * from "./generated/prisma";
 
-type LocationWithCoordinates = Location & {
-  coordinates: {
-    longitude: number;
-    latitude: number;
-  };
+export type Location = PrismaLocation & {
+  coordinates:
+    | {
+        longitude: number;
+        latitude: number;
+      }
+    | undefined;
 };
 
-export type PropertyWithLocation = Property & {
-  location: LocationWithCoordinates;
+export type Property = PrismaProperty & {
+  location: Location | undefined;
 };
+
+//! You should do these redefines first in your
+//! next project, so they wouldn't need to be
+//! undefined and instead properly handled.

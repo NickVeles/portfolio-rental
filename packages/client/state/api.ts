@@ -1,7 +1,7 @@
 import { cleanParams, withToast } from "@/lib/utils";
 import {
   Manager,
-  PropertyWithLocation,
+  Property,
   Tenant,
 } from "@portfolio-rental/shared";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -61,7 +61,7 @@ export const api = createApi({
     // --------------
     // property related endpoints
     getProperties: build.query<
-      PropertyWithLocation[],
+      Property[],
       Partial<FiltersState> & { favoriteIds?: number[] }
     >({
       query: (filters) => {
@@ -93,6 +93,19 @@ export const api = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         await withToast(queryFulfilled, {
           error: "Failed to fetch properties.",
+        });
+      },
+    }),
+
+    // GET TENANT
+    // ----------
+    // tenant related endpoints
+    getTenant: build.query<Tenant, string>({
+      query: (cognitoId) => `tenants/${cognitoId}`,
+      providesTags: (result) => [{ type: "Tenants", id: result?.id }],
+      async onQueryStarted(_, { queryFulfilled }) {
+        await withToast(queryFulfilled, {
+          error: "Failed to load tenant profile.",
         });
       },
     }),
@@ -174,6 +187,7 @@ export const api = createApi({
 export const {
   useGetAuthUserQuery,
   useGetPropertiesQuery,
+  useGetTenantQuery,
   useUpdateManagerMutation,
   useUpdateTenantMutation,
   useAddFavoritePropertyMutation,
