@@ -12,7 +12,7 @@ export interface FiltersState {
   coordinates: [number, number];
 }
 
-interface InitialStateTypes {
+export interface InitialStateTypes {
   filters: FiltersState;
   isFiltersFullOpen: boolean;
   viewMode: "grid" | "list";
