@@ -19,6 +19,9 @@ export const api = createApi({
   reducerPath: "api",
   tagTypes: ["Managers", "Tenants", "Properties"],
   endpoints: (build) => ({
+
+    // GET AUTH USER
+    // -------------
     getAuthUser: build.query<User, void>({
       queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
         try {
@@ -51,6 +54,8 @@ export const api = createApi({
       },
     }),
 
+    // GET PROPERTIES
+    // --------------
     // property related endpoints
     getProperties: build.query<
       PropertyWithLocation[],
@@ -89,6 +94,8 @@ export const api = createApi({
       },
     }),
 
+    // UPDATE TENANT
+    // -------------
     updateTenant: build.mutation<
       Tenant,
       Partial<Tenant> & { cognitoId: string }
@@ -101,6 +108,8 @@ export const api = createApi({
       invalidatesTags: (result) => [{ type: "Tenants", id: result?.id }],
     }),
 
+    // UPDATE MANAGER
+    // --------------
     updateManager: build.mutation<
       Manager,
       Partial<Manager> & { cognitoId: string }
@@ -113,6 +122,8 @@ export const api = createApi({
       invalidatesTags: (result) => [{ type: "Managers", id: result?.id }],
     }),
 
+    // ADD FAVORITE PROPERTY
+    // ---------------------
     addFavoriteProperty: build.mutation<
       Tenant,
       { cognitoId: string; propertyId: number }
